@@ -1,125 +1,14 @@
 <!doctype html>
-<html lang="en" ng-app="koan" ng-controller="AppCtrl">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="KOAN Stack (Koa, Angular, Node.js) - A real-time full-stack JavaScript Web development framework."/>
-  <script>
-    var token = window.sessionStorage.token || window.localStorage.token,
-        user = token && JSON.parse(window.sessionStorage.user || window.localStorage.user);
-    if (!user || user.exp < Math.round(new Date().getTime() / 1000))
-      window.location.replace('/login.html');
-  </script>
-  <title ng-bind="layout.title">KOAN Home</title>
+  <meta name="description" content="Inkling Stack"/>
+  <title ng-bind="layout.title">Inkling Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body>
-<div class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">
-        <img class="brand-image" style="padding-right: 25px;" src="img/koan.png" alt="KOAN"/>
-      </a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-flag"></span>
-            Notifications
-            <span class="badge" ng-bind="layout.user.notifications.length"></span>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li ng-repeat="notification in layout.user.notifications">
-              <a ng-href="/notifications/{{notification.id}}">{{notification.title}}</a> {{notification.message}}
-            </li>
-            <li ng-if="!layout.user.notifications" class="dropdown-header">No new notifications</li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-envelope"></span>
-            Messages
-            <span class="badge" ng-bind="layout.user.messages.length"></span>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li ng-repeat="message in layout.user.messages">
-              <a ng-href="/messages/{{message.id}}">{{message.title}}</a> {{message.message}}
-            </li>
-            <li ng-if="!layout.user.messages" class="dropdown-header">No unread messages</li>
-            <li class="divider"></li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-envelope"></span> Message Archive</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <form ng-submit="layout.search()" class="navbar-form navbar-left hidden-xs hidden-sm">
-        <div class="form-group">
-          <input name="q" type="text" ng-model="layout.searchQuery" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img ng-src="{{layout.user.picture}}" alt=""/>
-            <i class="self-online-indicator" ng-style="layout.onlineIndicatorStyle"></i>
-            <span ng-bind="layout.user.name"></span>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="" ng-click="layout.logout()">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+<body ng-controller="AppController">
+<div ui-view></div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-2">
-      <ul class="nav nav-pills nav-stacked sidenav">
-        <li ng-class="layout.active.home"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li ng-class="layout.active.profile"><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-      </ul>
-    </div>
-    <div class="col-md-7" ng-view></div>
-    <div class="col-md-3"></div>
-  </div>
-  <hr>
-  <footer>
-    <p>
-      KOAN &copy; Teoman Soygul (MIT License) &middot;
-      <a type="button" href="https://github.com/soygul/koan" class="btn btn-success"><strong>View on GitHub</strong></a>
-      <a type="button" href="https://github.com/soygul/koan/archive/master.zip" class="btn btn-primary"><strong>Download</strong></a>
-      <button type="button" ng-click="layout.flushDatabase()" class="btn btn-xs btn-warning pull-right"><strong>Flush Database</strong></button>
-    </p>
-  </footer>
-</div>
-
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/lodash/dist/lodash.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-elastic/elastic.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="js/app.js"></script>
-<script src="js/app-controller.js"></script>
-<script src="js/api-service.js"></script>
-<script src="modules/home/home.js"></script>
-<script src="modules/home/home-controller.js"></script>
-<script src="modules/profile/profile.js"></script>
-<script src="modules/profile/profile-controller.js"></script>
+<script src="bower_components/requirejs/require.js" data-main="js/main.js"></script>
 </body>
 </html>
