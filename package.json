@@ -49,6 +49,21 @@
     "karma-jasmine": "~0.1",
     "karma-phantomjs-launcher": "~0.1",
     "supertest": "~0.10",
-    "should": "~3.2"
+    "should": "~3.2",
+    "protractor": "git+ssh://git@github.com:angular/protractor.git",
+    "cucumber": "git+ssh://git@github.com:mojotech/cucumber-js.git",
+    "chai": "^1.9.0",
+    "chai-as-promised": "^4.1.1",
+    "co": "^3.0.4",
+    "random-js": "~1.0.2",
+    "gulp": "^3.0.0",
+    "gulp-install": "~0.1.4",
+    "gulp-conflict": "~0.1.1",
+    "gulp-template": "~0.1.1",
+    "inquirer": "~0.4.1",
+    "gulp-rename": "~1.2.0",
+    "gulp-notify": "~1.2.5",
+    "gulp-debug": "~0.3.0",
+    "gulp-util": "~2.2.14"
   }
 }

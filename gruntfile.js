@@ -78,5 +78,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['concurrent']);
 
-  grunt.registerTask('test', ['env:test', 'mochaTest:server', 'karma:unit']);
+  grunt.registerTask('test', ['cucumber:test','env:test', 'mochaTest:server', 'karma:unit']);
 };
