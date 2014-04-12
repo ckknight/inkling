@@ -16,8 +16,6 @@ results
 npm-debug.log
 node_modules/
 
-# KOAN
-
 dist
 .tmp
 .nodemon
@@ -33,4 +31,3 @@ logs/*
 # IntelliJ IDEA
 
 .idea/
-koan.iml
