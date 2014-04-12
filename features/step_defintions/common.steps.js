@@ -20,11 +20,11 @@ module.exports = function () {
   this.When(/the user swipes the screen to the right/, function*(){
 
   });
-  this.Then(/the original image is shown with (?:the|) retake button/, function*(){
+  this.Then(/the original image is shown with (?:the|) (.*) button/, function*(buttonName){
 
   });
 
-  this.Given(/User has swiped left from (?:the|) (.*) screen/i, function*(){
+  this.Given(/User has swiped left from (?:the|) (.*) screen/i, function*(screenName){
 
   });
   this.Given(/calendar event has been created/, function*(){
@@ -33,13 +33,12 @@ module.exports = function () {
   this.When(/event creation has completed/, function*(){
 
   });
-  this.Then(/(.*) screen is shown/, function*(){
+  this.Then(/(.*) screen is shown/, function*(screenName){
 
   });
-  this.Then(/has a "(.*)" button/, function*(){
+  this.Then(/has a "(.*)" button/, function*(buttonName){
 
   });
-
   this.Given(/(?:select|tap|press) (?:the |)"(.*)" (field|button|label)/, function*(action, name, type){
 
   });
@@ -52,4 +51,5 @@ module.exports = function () {
   this.Then(/keyboard is hidden and (?:the |)"(.*)" (?:screen|page) (?:is shown|pops up|displays|comes up)/, function*(){
 
   });
+
 };
