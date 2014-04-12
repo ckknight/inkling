@@ -3,6 +3,7 @@
 var slice = Array.prototype.slice;
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
+var Cucumber = require('cucumber');
 chai.use(chaiAsPromised);
 global.expect = chai.expect;
 global.co = require('co');

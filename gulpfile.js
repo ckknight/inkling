@@ -14,15 +14,16 @@ var gulp = require('gulp'),
   livereload = require('tiny-lr'),
   plumber = require('gulp-plumber'),
   server = livereload(),
-  uglify = require('gulp-uglify');
+  uglify = require('gulp-uglify'),
+  MatchStream = require('match-stream');
 
-gulp.task('scripts', function(cb) {
+gulp.task('scripts', function (cb) {
   return gulp.src('./client/*.js')
     .pipe(refresh(server))
     .pipe(gulp.dest('./client/js/build'));
 });
 
-gulp.task('html', function(){
+gulp.task('html', function () {
   return gulp.src('./client/*.html')
     .pipe(refresh(server));
 });
@@ -37,33 +38,37 @@ gulp.task('html', function(){
 //     .pipe(notify({message: 'completed sass compile.'}));
 // });
 
-gulp.task('clean', function(cb) {
-  gulp.src('build', {read: false})
-    .pipe(clean({force: true}));
+gulp.task('clean', function (cb) {
+  gulp.src('build', {
+    read: false
+  })
+    .pipe(clean({
+      force: true
+    }));
 });
 
-gulp.task('lr-server', function(cb) {
-  server.listen(35729, function(err) {
+gulp.task('lr-server', function (cb) {
+  server.listen(35729, function (err) {
     if (err) return console.log(err);
   });
 
 });
 
-gulp.task('watch', function(cb) {
+gulp.task('watch', function (cb) {
   gulp.watch(['./client/js/**/*.js'], ['scripts', 'html']);
   gulp.watch(['./client/templates/*.html', './client/templates/**/*.html'], ['html']);
   // gulp.watch('./client/sass/*.scss', ['styles']);
 });
 
-gulp.task('build', ['lr-server', 'scripts'/*, 'styles'*/]);
+gulp.task('build', ['lr-server', 'scripts' /*, 'styles'*/ ]);
 
 
 gulp.task('default', ['build', 'server', 'watch']);
 
 
-gulp.task('server', function(done){
+gulp.task('server', function (done) {
 
-  var child = new (forever.Monitor)('app.js', {
+  var child = new(forever.Monitor)('app.js', {
     max: 5,
     silent: false,
     command: 'node --harmony',
@@ -78,6 +83,7 @@ gulp.task('server', function(done){
 });
 
 gulp.task('test', function (done) {
+  var once;
   var webdriver = spawn('webdriver-manager start');
   var matcher = new MatchStream({
     pattern: 'Started org.openqa.jetty.jetty.Server'
@@ -85,25 +91,28 @@ gulp.task('test', function (done) {
     if (!matched) {
       return this.push(buf);
     }
-    this.push(buf);
     console.log("Selenium Server Started!!");
     startTest();
+    return this.push(null);
   });
   webdriver.stdout.pipe(matcher);
 
   function startTest() {
-    var test = spawn('node --harmony ./node_modules/protractor/bin/protractor ./protractor.conf.js');
-    test.stdout.on('data', function (data) {
-      console.log('stdout: ' + data);
-    });
-    test.stderr.on('data', function (data) {
-      console.log('stdout: ' + data);
-      done();
-    });
-    test.on('exit', function () {
-      webdriver.kill();
-      done();
-    });
+    if (!once) {
+      once = true;
+      var test = spawn('node --harmony ./node_modules/protractor/bin/protractor ./protractor.conf.js');
+      test.stdout.on('data', function (data) {
+        console.log('stdout: ' + data);
+      });
+      test.stderr.on('data', function (data) {
+        console.log('stdout: ' + data);
+        done();
+      });
+      test.on('exit', function () {
+        webdriver.kill();
+        done();
+      });
+    }
   }
 
 

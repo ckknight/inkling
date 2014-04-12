@@ -1,7 +1,7 @@
 Feature: View original photograph
-In order refer back to original event poster
-As a drunk concert goer
-I want swipe screen to the right
+	In order refer back to original event poster
+	As a drunk concert goer
+	I want swipe screen to the right
  
 Scenario: User needs to review original photo
 Given the event preview screen is showing
