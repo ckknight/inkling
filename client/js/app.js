@@ -16,7 +16,7 @@ define(function (require) {
         $stateProvider
           .state('home', {
             url: '/',
-            templateUrl: 'templates/home.html',
+            templateUrl: 'html/home.html',
             controller: 'HomeController'
           })
       }

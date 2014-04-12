@@ -79,6 +79,9 @@
     "gulp-livereload": "~1.2.0",
     "tiny-lr": "0.0.5",
     "gulp-uglify": "~0.2.1",
-    "gulp-plumber": "~0.6.0"
+    "gulp-plumber": "~0.6.0",
+    "requirejs": "~2.1.11",
+    "karma-requirejs": "~0.2.1",
+    "karma-coverage": "~0.2.1"
   }
 }
