@@ -1,20 +1,17 @@
 'use strict';
 
-/**
- * Remote debugging tools controller for the API. Remove this controller in production if you don't want random people dropping your database!
- */
+var route = require('koa-route');
 
-var route = require('koa-route'),
-    config = require('../config/config'),
-    mongoSeed = require('../config/mongo-seed');
-
-// register koa routes
 exports.init = function (app) {
-  app.use(route.post('/api/debug/flushDatabase', flushDatabase));
+  app.use(route.get('/api/brew-coffee', brewCoffee));
+  app.use(route.get('/api/throw-error', throwError));
 };
 
-function *flushDatabase() {
-  // todo: check user role === 'admin' when role system is ready
-  yield mongoSeed(true);
-  this.status = 200;
+function * brewCoffee() {
+  this.status = 418;
+  this.body = 'I am a teapot';
+}
+
+function * throwError() {
+  throw new Error('Test error thrown');
 }
