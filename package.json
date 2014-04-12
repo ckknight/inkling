@@ -74,6 +74,9 @@
     "gulp-rename": "~1.2.0",
     "gulp-notify": "~1.2.5",
     "gulp-debug": "~0.3.0",
-    "gulp-util": "~2.2.14"
+    "gulp-util": "~2.2.14",
+    "requirejs": "~2.1.11",
+    "karma-requirejs": "~0.2.1",
+    "karma-coverage": "~0.2.1"
   }
 }
